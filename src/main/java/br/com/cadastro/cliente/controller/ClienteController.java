@@ -18,6 +18,6 @@ public class ClienteController {
     // método get para buscar todos os clientes
     @GetMapping
     public List<Cliente> getClientes() {
-        return clienteService.getCliente();
+        return clienteService.getClientes();
     }
 }
