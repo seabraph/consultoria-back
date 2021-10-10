@@ -2,6 +2,7 @@ package br.com.cadastro.cliente.controller;
 
 import br.com.cadastro.cliente.domain.Cliente;
 import br.com.cadastro.cliente.service.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ClienteController {
 
     // atributo do service
+    @Autowired
     private ClienteService clienteService;
 
     // método get para buscar todos os clientes
