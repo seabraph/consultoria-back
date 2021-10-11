@@ -26,4 +26,14 @@ public class ClienteService {
         Cliente clienteDrop = this.clienteRepository.findById(idCliente).get();
         clienteRepository.delete(clienteDrop);
     }
+
+    public void updateCliente(Cliente cliente, long idCliente) {
+        Cliente clienteUpdate = this.clienteRepository.findById(idCliente).get();
+
+        clienteUpdate.setNome(cliente.getNome());
+        clienteUpdate.setSobrenome(cliente.getSobrenome());
+        clienteUpdate.setEmail(cliente.getEmail());
+
+        this.clienteRepository.save(clienteUpdate);
+    }
 }
