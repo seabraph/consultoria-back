@@ -26,4 +26,10 @@ public class ClienteController {
     public void insertCliente(@RequestBody Cliente cliente) {
         clienteService.insertCliente(cliente);
     }
+
+    // método para deletar um cliente
+    @DeleteMapping("/{id}")
+    public void dropCliente(@PathVariable ("id") long idCliente) {
+        clienteService.dropCliente(idCliente);
+    }
 }
