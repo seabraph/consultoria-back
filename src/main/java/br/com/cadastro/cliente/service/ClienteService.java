@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -19,5 +20,10 @@ public class ClienteService {
 
     public void insertCliente(Cliente cliente) {
         clienteRepository.save(cliente);
+    }
+
+    public void dropCliente(long idCliente){
+        Cliente clienteDrop = this.clienteRepository.findById(idCliente).get();
+        clienteRepository.delete(clienteDrop);
     }
 }
