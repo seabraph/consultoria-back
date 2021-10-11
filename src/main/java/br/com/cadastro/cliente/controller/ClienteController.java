@@ -3,9 +3,7 @@ package br.com.cadastro.cliente.controller;
 import br.com.cadastro.cliente.domain.Cliente;
 import br.com.cadastro.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,11 @@ public class ClienteController {
     @GetMapping
     public List<Cliente> getClientes() {
         return clienteService.getClientes();
+    }
+
+    // método post para acrescentar novos clientes
+    @PostMapping
+    public void insertCliente(@RequestBody Cliente cliente) {
+        clienteService.insertCliente(cliente);
     }
 }
