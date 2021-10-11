@@ -15,15 +15,15 @@ public class Cliente {
     private Long id;
 
     @NotNull
-    @Size(min = 3, max = 30)
+    @Size(min = 1, max = 32)
     private String nome;
 
     @NotNull
-    @Size(min = 5, max = 30)
+    @Size(min = 1, max = 128)
     private String sobrenome;
 
     @NotNull
-    @Size(min = 15, max = 100)
+    @Size(min = 1, max = 128)
     private String email;
 
     public Cliente() {
