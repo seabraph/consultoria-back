@@ -32,4 +32,9 @@ public class ClienteController {
     public void dropCliente(@PathVariable ("id") long idCliente) {
         clienteService.dropCliente(idCliente);
     }
+
+    @PutMapping("/{id}")
+    public void updateCliente(@RequestBody Cliente cliente, @PathVariable (value = "id") long idCliente) {
+        clienteService.updateCliente(cliente, idCliente);
+    }
 }
