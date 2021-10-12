@@ -27,8 +27,8 @@ public class ClienteService {
         clienteRepository.delete(clienteDrop);
     }
 
-    public void updateCliente(Cliente cliente, long idCliente) {
-        Cliente clienteUpdate = this.clienteRepository.findById(idCliente).get();
+    public void updateCliente(Cliente cliente) {
+        Cliente clienteUpdate = this.clienteRepository.findById(cliente.getId()).get();
 
         clienteUpdate.setNome(cliente.getNome());
         clienteUpdate.setSobrenome(cliente.getSobrenome());
