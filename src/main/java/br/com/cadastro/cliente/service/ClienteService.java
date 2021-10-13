@@ -19,10 +19,14 @@ public class ClienteService {
     }
 
     public void insertCliente(Cliente cliente) {
-        clienteRepository.save(cliente);
+        try {
+            clienteRepository.save(cliente);
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+        }
     }
 
-    public void dropCliente(long idCliente){
+    public void dropCliente(long idCliente) {
         Cliente clienteDrop = this.clienteRepository.findById(idCliente).get();
         clienteRepository.delete(clienteDrop);
     }
