@@ -16,6 +16,7 @@ public class ServicoController {
 
     @GetMapping
     public List<Servico> getServicos() {
+        System.out.println(" ");
         return servicoService.getServicos();
     }
 
