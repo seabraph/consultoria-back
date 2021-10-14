@@ -27,17 +27,27 @@ public class ClienteService {
     }
 
     public void dropCliente(long idCliente) {
-        Cliente clienteDrop = this.clienteRepository.findById(idCliente).get();
-        clienteRepository.delete(clienteDrop);
+        try {
+            Cliente clienteDrop = this.clienteRepository.findById(idCliente).get();
+            clienteRepository.delete(clienteDrop);
+
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+        }
     }
 
     public void updateCliente(Cliente cliente) {
-        Cliente clienteUpdate = this.clienteRepository.findById(cliente.getId()).get();
+        try {
+            Cliente clienteUpdate = this.clienteRepository.findById(cliente.getId()).get();
 
-        clienteUpdate.setNome(cliente.getNome());
-        clienteUpdate.setSobrenome(cliente.getSobrenome());
-        clienteUpdate.setEmail(cliente.getEmail());
+            clienteUpdate.setNome(cliente.getNome());
+            clienteUpdate.setSobrenome(cliente.getSobrenome());
+            clienteUpdate.setEmail(cliente.getEmail());
 
-        this.clienteRepository.save(clienteUpdate);
+            this.clienteRepository.save(clienteUpdate);
+
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+        }
     }
 }
