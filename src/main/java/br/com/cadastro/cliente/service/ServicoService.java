@@ -35,7 +35,7 @@ public class ServicoService {
 
     public void updateServico(Servico novoServico){
         try {
-            Servico servico = servicoRepository.getById(novoServico.getId());
+            Servico servico = servicoRepository.findById(novoServico.getId()).get();
 
             servico.setTitulo(novoServico.getTitulo());
             servico.setDescricao(novoServico.getDescricao());
