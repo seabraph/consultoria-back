@@ -14,25 +14,21 @@ import java.util.List;
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    // atributo do service
     @Autowired
     private ClienteService clienteService;
 
-    // método get para buscar todos os clientes
     @GetMapping
     public List<Cliente> getClientes() {
         return clienteService.getClientes();
     }
 
-    // método post para acrescentar novos clientes
     @PostMapping
     public void insertCliente(@RequestBody Cliente cliente) {
         clienteService.insertCliente(cliente);
     }
 
-    // método para deletar um cliente
     @DeleteMapping("/{id}")
-    public void dropCliente(@PathVariable ("id") long idCliente) {
+    public void dropCliente(@PathVariable ("id") Long idCliente) {
         clienteService.dropCliente(idCliente);
     }
 

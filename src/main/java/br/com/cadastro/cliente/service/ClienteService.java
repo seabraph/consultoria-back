@@ -37,13 +37,13 @@ public class ClienteService {
 
     public void updateCliente(Cliente novoCliente) {
         try {
-            Cliente cliente = this.clienteRepository.findById(novoCliente.getId()).get();
+            Cliente cliente = clienteRepository.findById(novoCliente.getId()).get();
 
             cliente.setNome(novoCliente.getNome());
             cliente.setSobrenome(novoCliente.getSobrenome());
             cliente.setEmail(novoCliente.getEmail());
 
-            this.clienteRepository.save(cliente);
+            clienteRepository.save(cliente);
 
         } catch (IllegalArgumentException e) {
             e.getMessage();
