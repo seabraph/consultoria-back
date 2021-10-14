@@ -29,7 +29,8 @@ public class ServicoController {
         servicoService.dropServico(idServico);
     }
 
-    @PutMapping void updateServico(@RequestBody Servico servico) {
+    @PutMapping
+    public void updateServico(@RequestBody Servico servico) {
         servicoService.updateServico(servico);
     }
 }
