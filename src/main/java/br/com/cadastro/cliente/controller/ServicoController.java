@@ -16,7 +16,6 @@ public class ServicoController {
 
     @GetMapping
     public List<Servico> getServicos() {
-        System.out.println(" ");
         return servicoService.getServicos();
     }
 
@@ -25,7 +24,7 @@ public class ServicoController {
         servicoService.insertServico(servico);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void dropServico(@PathVariable ("id") Long idServico) {
         servicoService.dropServico(idServico);
     }
