@@ -4,8 +4,12 @@ import br.com.cadastro.cliente.domain.Usuario;
 import br.com.cadastro.cliente.enums.Status;
 import br.com.cadastro.cliente.repository.UsuarioRepository;
 import br.com.cadastro.cliente.service.UsuarioService;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,9 +21,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("registrar")
-    public Status registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
-        return usuarioService.registrarUsuario(novoUsuario);
+    @PostMapping("cadastro")
+    public void registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
+        this.usuarioService.registrarUsuario(novoUsuario);
+
+        throw new ResponseStatusException(HttpStatus.OK, "Cause description here");
     }
 
     @PostMapping("login")

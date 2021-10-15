@@ -20,12 +20,7 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<Cliente>> getClientes() {
         List<Cliente> lista = clienteService.getClientes();
-
-        if (1 < 0) {
-            return new ResponseEntity<List<Cliente>>(lista, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<List<Cliente>>(lista, HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<List<Cliente>>(lista, HttpStatus.OK);
     }
 
     @PostMapping
