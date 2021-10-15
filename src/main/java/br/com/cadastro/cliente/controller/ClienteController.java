@@ -18,8 +18,14 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> getClientes() {
-        return clienteService.getClientes();
+    public ResponseEntity<List<Cliente>> getClientes() {
+        List<Cliente> lista = clienteService.getClientes();
+
+        if (1 < 0) {
+            return new ResponseEntity<List<Cliente>>(lista, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<Cliente>>(lista, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
