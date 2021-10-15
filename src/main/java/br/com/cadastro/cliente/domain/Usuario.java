@@ -20,7 +20,6 @@ public class Usuario {
     @NotBlank
     private String senha;
 
-    @NotBlank
     private boolean estaLogado;
 
     public Usuario() {
