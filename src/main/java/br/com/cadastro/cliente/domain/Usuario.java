@@ -31,6 +31,38 @@ public class Usuario {
         this.estaLogado = false;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isEstaLogado() {
+        return estaLogado;
+    }
+
+    public void setEstaLogado(boolean estaLogado) {
+        this.estaLogado = estaLogado;
+    }
+
     @Override
     public boolean equals(Object objeto) {
         if (this == objeto) return true;
