@@ -22,10 +22,11 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("cadastro")
-    public void registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
+    public ResponseEntity<Usuario> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
         this.usuarioService.registrarUsuario(novoUsuario);
+        String string = "retorno";
+        return new ResponseEntity<Usuario>(novoUsuario, HttpStatus.OK);
 
-        throw new ResponseStatusException(HttpStatus.OK, "Cause description here");
     }
 
     @PostMapping("login")
