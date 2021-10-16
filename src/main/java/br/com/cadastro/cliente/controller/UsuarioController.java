@@ -1,5 +1,6 @@
 package br.com.cadastro.cliente.controller;
 
+import br.com.cadastro.cliente.domain.Erro;
 import br.com.cadastro.cliente.domain.Usuario;
 import br.com.cadastro.cliente.enums.Status;
 import br.com.cadastro.cliente.repository.UsuarioRepository;
@@ -22,11 +23,9 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("cadastro")
-    public ResponseEntity<Usuario> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
+    public ResponseEntity<Erro> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
         this.usuarioService.registrarUsuario(novoUsuario);
-        String string = "retorno";
-        return new ResponseEntity<Usuario>(novoUsuario, HttpStatus.OK);
-
+        return new ResponseEntity<Erro>(new Erro(), HttpStatus.OK);
     }
 
     @PostMapping("login")
