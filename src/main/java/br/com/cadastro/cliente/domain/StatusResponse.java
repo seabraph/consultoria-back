@@ -1,16 +1,16 @@
 package br.com.cadastro.cliente.domain;
 
-public class Erro {
+public class StatusResponse {
 
     private String msg;
     private String status;
 
-    public Erro() {
-        this.msg = "erro";
-        this.status = "status ruim";
+    public StatusResponse() {
+        this.msg = "mensagem default";
+        this.status = "status default";
     }
 
-    public Erro(String msg, String status) {
+    public StatusResponse(String msg, String status) {
         this.msg = msg;
         this.status = status;
     }
