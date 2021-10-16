@@ -1,7 +1,10 @@
 package br.com.cadastro.cliente.service;
 
 import br.com.cadastro.cliente.domain.Cliente;
+import br.com.cadastro.cliente.domain.Servico;
+import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.repository.ClienteRepository;
+import ch.qos.logback.core.net.server.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,35 +21,39 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public void insertCliente(Cliente cliente) {
-        try {
-            clienteRepository.save(cliente);
-        } catch (IllegalArgumentException e) {
-            e.getMessage();
+    public StatusResponse insertCliente(Cliente novoCliente) {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        for (Cliente cliente: clientes){
+            if (cliente.equals(novoCliente)){
+                return new StatusResponse("Cliente já existe", "erro");
+            }
         }
+
+        clienteRepository.save(novoCliente);
+        return new StatusResponse("Cliente cadastrado com sucesso", "sucesso");
+
     }
 
-    public void dropCliente(long idCliente) {
-        try {
-            clienteRepository.deleteById(idCliente);
+    public StatusResponse dropCliente(long idCliente) {
 
-        } catch (IllegalArgumentException e) {
-            e.getMessage();
+        if (clienteRepository.findById(idCliente) == null){
+            return new StatusResponse("Cliente não existe", "erro");
         }
+
+        clienteRepository.deleteById(idCliente);
+        return new StatusResponse("Cliente deletado com sucesso", "sucesso");
     }
 
-    public void updateCliente(Cliente novoCliente) {
-        try {
-            Cliente cliente = clienteRepository.findById(novoCliente.getId()).get();
+    public StatusResponse updateCliente(Cliente novoCliente) {
 
-            cliente.setNome(novoCliente.getNome());
-            cliente.setSobrenome(novoCliente.getSobrenome());
-            cliente.setEmail(novoCliente.getEmail());
+        Cliente cliente = clienteRepository.findById(novoCliente.getId()).get();
 
-            clienteRepository.save(cliente);
+        cliente.setNome(novoCliente.getNome());
+        cliente.setSobrenome(novoCliente.getSobrenome());
+        cliente.setEmail(novoCliente.getEmail());
 
-        } catch (IllegalArgumentException e) {
-            e.getMessage();
-        }
+        clienteRepository.save(cliente);
+        return new StatusResponse("Cliente alterado com sucesso", "sucesso");
     }
 }

@@ -1,11 +1,14 @@
 package br.com.cadastro.cliente.service;
 
 import br.com.cadastro.cliente.domain.Servico;
+import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.repository.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicoService {
@@ -17,34 +20,40 @@ public class ServicoService {
         return servicoRepository.findAll();
     }
 
-    public void insertServico(Servico servico){
-        try{
-            servicoRepository.save(servico);
-        }catch (IllegalArgumentException e){
-            e.getMessage();
+    public StatusResponse insertServico(Servico novoServico){
+        List<Servico> servicos = servicoRepository.findAll();
+
+        for (Servico servico: servicos){
+            if (servico.equals(novoServico)){
+                return new StatusResponse("Serviço já existe", "erro");
+            }
         }
+
+        servicoRepository.save(novoServico);
+        return new StatusResponse("Serviço cadastrado com sucesso", "sucesso");
+
     }
 
-    public void dropServico(long idServico){
-        try {
-            servicoRepository.deleteById(idServico);
-        }catch (IllegalArgumentException e){
-            e.getMessage();
+    public StatusResponse dropServico(long idServico){
+        List<Servico> servicos = servicoRepository.findAll();
+
+        if (servicoRepository.findById(idServico) == null){
+            return new StatusResponse("Serviço não existe", "erro");
         }
+
+        servicoRepository.deleteById(idServico);
+        return new StatusResponse("Serviço deletado com sucesso", "sucesso");
     }
 
-    public void updateServico(Servico novoServico){
-        try {
-            Servico servico = servicoRepository.findById(novoServico.getId()).get();
+    public StatusResponse updateServico(Servico novoServico) {
 
-            servico.setTitulo(novoServico.getTitulo());
-            servico.setDescricao(novoServico.getDescricao());
-            servico.setValor(novoServico.getValor());
+        Servico servico = servicoRepository.findById(novoServico.getId()).get();
 
-            servicoRepository.save(servico);
+        servico.setTitulo(novoServico.getTitulo());
+        servico.setDescricao(novoServico.getDescricao());
+        servico.setValor(novoServico.getValor());
 
-        }catch (IllegalArgumentException e) {
-            e.getMessage();
-        }
+        servicoRepository.save(servico);
+        return new StatusResponse("Serviço alterado com sucesso", "sucesso");
     }
 }

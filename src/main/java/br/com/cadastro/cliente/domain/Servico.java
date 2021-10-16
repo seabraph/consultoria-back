@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 public class Servico {
@@ -55,5 +56,29 @@ public class Servico {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Servico)){
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, descricao, valor);
+    }
+
+    @Override
+    public String toString() {
+        return "Servico{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", valor=" + valor +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package br.com.cadastro.cliente.controller;
 
 import br.com.cadastro.cliente.domain.Cliente;
+import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,17 +25,21 @@ public class ClienteController {
     }
 
     @PostMapping
-    public void insertCliente(@RequestBody Cliente cliente) {
-        clienteService.insertCliente(cliente);
+    public ResponseEntity<StatusResponse> insertCliente(@RequestBody Cliente cliente) {
+        StatusResponse statusResponse = clienteService.insertCliente(cliente);
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void dropCliente(@PathVariable ("id") Long idCliente) {
-        clienteService.dropCliente(idCliente);
+    public ResponseEntity<StatusResponse> dropCliente(@PathVariable ("id") Long idCliente) {
+        StatusResponse statusResponse = clienteService.dropCliente(idCliente);
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 
     @PutMapping
-    public void updateCliente(@RequestBody Cliente cliente) {
-        clienteService.updateCliente(cliente);
+    public ResponseEntity<StatusResponse> updateCliente(@RequestBody Cliente cliente) {
+        StatusResponse statusResponse = clienteService.updateCliente(cliente);
+
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 }
