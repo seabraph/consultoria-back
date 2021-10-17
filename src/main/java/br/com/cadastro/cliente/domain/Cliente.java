@@ -16,15 +16,12 @@ public class Cliente {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 32)
     private String nome;
 
     @NotNull
-    @Size(min = 1, max = 128)
     private String sobrenome;
 
     @NotNull
-    @Size(min = 1, max = 128)
     private String email;
 
     public Cliente() {

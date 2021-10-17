@@ -25,7 +25,6 @@ public class ServicoController {
     @PostMapping
     public ResponseEntity<StatusResponse> insertServico(@RequestBody Servico servico) {
         StatusResponse statusResponse = servicoService.insertServico(servico);
-
         return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 

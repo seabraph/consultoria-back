@@ -16,11 +16,9 @@ public class Servico {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 50)
     private String titulo;
 
     @NotNull
-    @Size(min = 1, max = 300)
     private String descricao;
 
     @NotNull
@@ -59,12 +57,11 @@ public class Servico {
     }
 
     @Override
-    public boolean equals(Object object){
-        if(!(object instanceof Servico)){
-            return false;
-        }
-
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Servico servico = (Servico) o;
+        return Objects.equals(id, servico.id) && Objects.equals(titulo, servico.titulo) && Objects.equals(descricao, servico.descricao) && Objects.equals(valor, servico.valor);
     }
 
     @Override

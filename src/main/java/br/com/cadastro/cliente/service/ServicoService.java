@@ -46,8 +46,11 @@ public class ServicoService {
     }
 
     public StatusResponse updateServico(Servico novoServico) {
-
         Servico servico = servicoRepository.findById(novoServico.getId()).get();
+
+        if (novoServico.getTitulo() == "" || novoServico.getDescricao() == "" || novoServico.getValor() == null){
+            return new StatusResponse("Dados invalidos", "erro");
+        }
 
         servico.setTitulo(novoServico.getTitulo());
         servico.setDescricao(novoServico.getDescricao());

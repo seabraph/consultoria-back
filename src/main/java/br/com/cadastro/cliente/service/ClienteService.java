@@ -49,6 +49,10 @@ public class ClienteService {
 
         Cliente cliente = clienteRepository.findById(novoCliente.getId()).get();
 
+        if (novoCliente.getNome() == "" || novoCliente.getEmail() == "" || novoCliente.getSobrenome() == ""){
+            return new StatusResponse("Dados invalidos", "erro");
+        }
+
         cliente.setNome(novoCliente.getNome());
         cliente.setSobrenome(novoCliente.getSobrenome());
         cliente.setEmail(novoCliente.getEmail());
