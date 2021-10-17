@@ -39,14 +39,22 @@ public class UsuarioService {
         List<Usuario> usuarios = usuarioRepository.findAll();
 
         for (Usuario u : usuarios) {
+
             if (u.equals(usuario)) {
                 usuario.setEstaLogado(true);
-                usuarioRepository.save(usuario);
-                return new StatusResponse("login realizado com sucesso", "sucesso");
+
+                if (usuario.getTipoConta().intern() == "admin") {
+                    usuarioRepository.save(usuario);
+                    return new StatusResponse("login do admin realizado com sucesso", "sucesso");
+                } else {
+                    usuarioRepository.save(usuario);
+                    return new StatusResponse("login do usuário realizado com sucesso", "sucesso");
+                }
             }
         }
         return new StatusResponse("erro ao realizar login", "erro");
     }
+
     public StatusResponse logoutUsuario(Usuario usuario) {
         List<Usuario> usuarios = usuarioRepository.findAll();
 
