@@ -20,6 +20,7 @@ public class UsuarioController {
 
     @PostMapping("cadastro")
     public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
+        System.out.println(novoUsuario.getTipoConta());
         StatusResponse statusResponse = this.usuarioService.registrarUsuario(novoUsuario);
         return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }

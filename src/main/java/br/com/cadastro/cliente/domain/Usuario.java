@@ -1,9 +1,6 @@
 package br.com.cadastro.cliente.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -14,23 +11,23 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String nomeUsuario;
 
-    @NotBlank
     private String senha;
 
     private boolean estaLogado;
 
-    @NotBlank
+    @Column(name = "tipoconta")
     private String tipoConta;
 
     public Usuario() {
     }
-    public Usuario(String nomeUsuario, String senha) {
+
+    public Usuario(String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
-        this.estaLogado = false;
+        this.estaLogado = estaLogado;
+        this.tipoConta = tipoConta;
     }
 
     public Long getId() {
@@ -88,5 +85,13 @@ public class Usuario {
                 ", senha='" + senha + '\'' +
                 ", loggedIn=" + estaLogado +
                 '}';
+    }
+
+    public String getTipoConta() {
+        return this.tipoConta;
+    }
+
+    public void setTipoConta(String tipoConta) {
+        this.tipoConta = tipoConta;
     }
 }

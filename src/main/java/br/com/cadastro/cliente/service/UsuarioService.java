@@ -25,8 +25,13 @@ public class UsuarioService {
             }
         }
 
-        usuarioRepository.save(novoUsuario);
-        return new StatusResponse("usuário cadastrado com sucesso", "sucesso");
+        if (novoUsuario.getTipoConta().intern() == "admin") {
+            usuarioRepository.save(novoUsuario);
+            return new StatusResponse("usuário do tipo admin cadastrado com sucesso", "sucesso");
+        } else {
+            usuarioRepository.save(novoUsuario);
+            return new StatusResponse("usuário cadastrado com sucesso", "sucesso");
+        }
     }
 
     public StatusResponse loginUsuario(Usuario usuario) {
