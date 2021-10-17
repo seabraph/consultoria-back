@@ -22,6 +22,9 @@ public class Usuario {
 
     private boolean estaLogado;
 
+    @NotBlank
+    private String tipoConta;
+
     public Usuario() {
     }
     public Usuario(String nomeUsuario, String senha) {

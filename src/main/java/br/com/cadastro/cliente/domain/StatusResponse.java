@@ -4,6 +4,7 @@ public class StatusResponse {
 
     private String msg;
     private String status;
+    private String tipoConta;
 
     public StatusResponse() {
         this.msg = "mensagem default";
@@ -13,6 +14,12 @@ public class StatusResponse {
     public StatusResponse(String msg, String status) {
         this.msg = msg;
         this.status = status;
+    }
+
+    public StatusResponse(String msg, String status, String tipoConta) {
+        this.msg = msg;
+        this.status = status;
+        this.tipoConta = tipoConta;
     }
 
     public String getMsg() {
