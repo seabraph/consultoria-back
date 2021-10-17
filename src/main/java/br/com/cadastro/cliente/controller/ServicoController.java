@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/servico")
+@CrossOrigin("*")
 public class ServicoController {
 
     @Autowired
