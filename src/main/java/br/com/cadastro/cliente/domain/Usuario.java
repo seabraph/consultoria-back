@@ -28,13 +28,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
-        this.id = id;
+    public Usuario(String nomeUsuario, String email, String senha) {
         this.nomeUsuario = nomeUsuario;
+        this.email = email;
         this.senha = senha;
-        this.estaLogado = estaLogado;
-        this.tipoConta = tipoConta;
     }
+
     public Usuario(String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
@@ -42,7 +41,13 @@ public class Usuario {
         this.tipoConta = tipoConta;
     }
 
-
+    public Usuario(Long id, String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
+        this.id = id;
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
+        this.estaLogado = estaLogado;
+        this.tipoConta = tipoConta;
+    }
 
     public Long getId() {
         return id;
@@ -107,5 +112,17 @@ public class Usuario {
 
     public void setTipoConta(String tipoConta) {
         this.tipoConta = tipoConta;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

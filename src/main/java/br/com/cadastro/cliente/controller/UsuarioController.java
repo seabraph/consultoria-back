@@ -2,6 +2,8 @@ package br.com.cadastro.cliente.controller;
 
 import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.domain.Usuario;
+import br.com.cadastro.cliente.dto.DadosLogin;
+import br.com.cadastro.cliente.dto.UsuarioAuthDTO;
 import br.com.cadastro.cliente.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,11 +20,12 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("login")
-    public ResponseEntity<StatusResponse> loginUsuario(@Valid @RequestBody Usuario usuario) {
-        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
-        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
-    }
+//    @PostMapping("login")
+//    public ResponseEntity<StatusResponse> loginUsuario(@Valid @RequestBody Usuario usuario) {
+//        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
+//        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
+//    }
+
 
     @PostMapping("cadastro")
     public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
