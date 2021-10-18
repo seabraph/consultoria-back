@@ -70,10 +70,10 @@ public class UsuarioService {
     }
 
 
-    public Usuario autenticar(DadosLogin dados, String token){
+    public Usuario autenticar(DadosLogin dados){
         Usuario user = usuarioRepository.findByEmail(dados.getEmail()).orElseThrow(EmailExistenteException::new);
 
-        if(dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
+        if(dados.getSenha().equals(user.getSenha())) {
             return user;
         }
         else {

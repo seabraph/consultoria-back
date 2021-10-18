@@ -23,11 +23,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-//    @PostMapping("login")
-//    public ResponseEntity<StatusResponse> loginUsuario(@Valid @RequestBody Usuario usuario) {
-//        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
-//        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
-//    }
     @GetMapping("/usuarios")
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> lista = usuarioService.getUsuarios();
@@ -35,21 +30,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UsuarioAuthDTO> autenticar(@RequestBody DadosLogin dadosLogin, @RequestHeader String Authorization){
-        Usuario user = usuarioService.autenticar(dadosLogin, Authorization);
+    public ResponseEntity<UsuarioAuthDTO> autenticar(@RequestBody DadosLogin dadosLogin){
+        Usuario user = usuarioService.autenticar(dadosLogin);
         return new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
     }
-
-//    @PostMapping("cadastro")
-//    public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
-//        System.out.println(novoUsuario.getTipoConta());
-//        StatusResponse statusResponse = this.usuarioService.registrarUsuario(novoUsuario);
-//        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
-//    }
 
     @PostMapping("/cadastro")
     public ResponseEntity<UsuarioAuthDTO> registrate(@RequestBody UsuarioRegDTO usuarioRegDTO){
         Usuario user = usuarioService.registrar(usuarioRegDTO.toUsuario());
+
         return  new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.CREATED);
     }
 

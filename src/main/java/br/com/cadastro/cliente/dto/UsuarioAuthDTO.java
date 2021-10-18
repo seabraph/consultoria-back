@@ -19,7 +19,7 @@ public class UsuarioAuthDTO {
     public UsuarioAuthDTO(){}
 
     public static UsuarioAuthDTO toDTO(Usuario usuario, String tipo) {
-        return new UsuarioAuthDTO(usuario.getEmail(), usuario.getNomeUsuario(), usuario.getToken(), tipo);
+        return new UsuarioAuthDTO(usuario.getEmail(), usuario.getNome(), usuario.getToken(), tipo);
     }
 
     public String getEmail() {

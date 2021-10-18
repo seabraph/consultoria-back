@@ -11,42 +11,60 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeUsuario;
-
+    private String nome;
     private String email;
-
     private String senha;
-
-    private boolean estaLogado;
-
-
-    @Column(name = "tipoconta")
-    private String tipoConta;
-
+    private boolean logado;
+    private String tipo;
     private String token;
 
     public Usuario() {
     }
 
-    public Usuario(String nomeUsuario, String email, String senha) {
-        this.nomeUsuario = nomeUsuario;
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Usuario(String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
-        this.nomeUsuario = nomeUsuario;
+    public Usuario(String nome, String senha, boolean logado, String tipo) {
+        this.nome = nome;
         this.senha = senha;
-        this.estaLogado = estaLogado;
-        this.tipoConta = tipoConta;
+        this.logado = logado;
+        this.tipo= tipo;
     }
 
-    public Usuario(Long id, String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
+    public Usuario(Long id, String nome, String senha, boolean logado, String tipo) {
         this.id = id;
-        this.nomeUsuario = nomeUsuario;
+        this.nome = nome;
         this.senha = senha;
-        this.estaLogado = estaLogado;
-        this.tipoConta = tipoConta;
+        this.logado = logado;
+        this.tipo= tipo;
+    }
+
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto) return true;
+        if (!(objeto instanceof Usuario)) return false;
+        Usuario user = (Usuario) objeto;
+        return Objects.equals(nome, user.nome) &&
+                Objects.equals(senha, user.senha);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, senha,
+                logado);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", usuario='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", loggedIn=" + logado +
+                '}';
     }
 
     public Long getId() {
@@ -57,12 +75,20 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -73,49 +99,20 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public boolean isEstaLogado() {
-        return estaLogado;
+    public boolean isLogado() {
+        return logado;
     }
 
-    public void setEstaLogado(boolean estaLogado) {
-        this.estaLogado = estaLogado;
+    public void setLogado(boolean logado) {
+        this.logado = logado;
     }
 
-    @Override
-    public boolean equals(Object objeto) {
-        if (this == objeto) return true;
-        if (!(objeto instanceof Usuario)) return false;
-        Usuario user = (Usuario) objeto;
-        return Objects.equals(nomeUsuario, user.nomeUsuario) &&
-                Objects.equals(senha, user.senha);
+    public String getTipo() {
+        return tipo;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomeUsuario, senha,
-                estaLogado);
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", usuario='" + nomeUsuario + '\'' +
-                ", senha='" + senha + '\'' +
-                ", loggedIn=" + estaLogado +
-                '}';
-    }
-
-    public String getTipoConta() {
-        return this.tipoConta;
-    }
-
-    public void setTipoConta(String tipoConta) {
-        this.tipoConta = tipoConta;
-    }
-
-    public String getEmail() {
-        return email;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getToken() {

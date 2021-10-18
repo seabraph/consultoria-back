@@ -20,7 +20,7 @@ public class UsuarioRespDTO {
     public UsuarioRespDTO(){}
 
     public static UsuarioRespDTO toDTO(Usuario usuario) {
-        return new UsuarioRespDTO(usuario.getNomeUsuario(), usuario.getEmail(), usuario.getSenha());
+        return new UsuarioRespDTO(usuario.getNome(), usuario.getEmail(), usuario.getSenha());
     }
 
 
