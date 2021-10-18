@@ -28,7 +28,7 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<UsuarioAuthDTO> autenticar(@RequestBody DadosLogin dadosLogin, @RequestHeader String Authorization){
-        Usuario user = UsuarioService.authenticate(dadosLogin, Authorization);
+        Usuario user = usuarioService.autenticar(dadosLogin, Authorization);
         return new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
     }
 
@@ -37,12 +37,6 @@ public class UsuarioController {
     public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
         System.out.println(novoUsuario.getTipoConta());
         StatusResponse statusResponse = this.usuarioService.registrarUsuario(novoUsuario);
-        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
-    }
-
-    @PostMapping("logout")
-    public ResponseEntity<StatusResponse> logoutUsuario(@Valid @RequestBody Usuario usuario) {
-        StatusResponse statusResponse = usuarioService.logoutUsuario(usuario);
         return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 }

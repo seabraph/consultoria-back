@@ -3,6 +3,10 @@ package br.com.cadastro.cliente.service;
 import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.domain.Usuario;
 import br.com.cadastro.cliente.dto.DadosLogin;
+import br.com.cadastro.cliente.exceptions.EmailExistenteException;
+import br.com.cadastro.cliente.exceptions.LoginInvalidoException;
+import br.com.cadastro.cliente.exceptions.TokenExpiradoException;
+import br.com.cadastro.cliente.exceptions.TokenInvalidoException;
 import br.com.cadastro.cliente.repository.UsuarioRepository;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
     public StatusResponse registrarUsuario(Usuario novoUsuario) {
 
@@ -60,13 +65,13 @@ public class UsuarioService {
 //        return new StatusResponse("erro ao realizar login", "erro");
 //    }
 
-    public Usuario authenticate(DadosLogin dados, String token){
-        Usuario user = usuarioRepository.findByEmail(dados.getEmail()).orElseThrow(ExistingEmailException::new);
+    public Usuario autenticar(DadosLogin dados, String token){
+        Usuario user = usuarioRepository.findByEmail(dados.getEmail()).orElseThrow(EmailExistenteException::new);
         if(dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
             return user;
         }
         else {
-            throw new InvalidLoginException();
+            throw new LoginInvalidoException();
         }
     }
     private boolean validate(String token) {
@@ -77,31 +82,17 @@ public class UsuarioService {
             System.out.println(claims.getIssuer());
             System.out.println(claims.getIssuedAt());
             //Verifica se o token está expirado
-            if (claims.getExpiration().before(new Date(System.currentTimeMillis()))) throw new ExpiredTokenException();
+            if (claims.getExpiration().before(new Date(System.currentTimeMillis()))) throw new TokenExpiradoException();
             System.out.println(claims.getExpiration());
             return true;
-        } catch (ExpiredTokenException et){
+        } catch (TokenExpiradoException et){
             et.printStackTrace();
             throw et;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new InvalidTokenException();
+            throw new TokenInvalidoException();
         }
 
-    }
-
-
-    public StatusResponse logoutUsuario(Usuario usuario) {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-
-        for (Usuario u : usuarios) {
-            if (u.equals(usuario)) {
-                usuario.setEstaLogado(false);
-                usuarioRepository.save(usuario);
-                return new StatusResponse("logout realizado com sucesso", "sucesso");
-            }
-        }
-        return new StatusResponse("erro ao realizar logout", "erro");
     }
 
 }
