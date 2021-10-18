@@ -26,6 +26,12 @@ public class UsuarioController {
 //        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
 //    }
 
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioAuthDTO> autenticar(@RequestBody DadosLogin dadosLogin, @RequestHeader String Authorization){
+        Usuario user = UsuarioService.authenticate(dadosLogin, Authorization);
+        return new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
+    }
+
 
     @PostMapping("cadastro")
     public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
