@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -27,6 +28,11 @@ public class UsuarioController {
 //        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
 //        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
 //    }
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> getUsuarios() {
+        List<Usuario> lista = usuarioService.getUsuarios();
+        return new ResponseEntity<List<Usuario>>(lista, HttpStatus.OK);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<UsuarioAuthDTO> autenticar(@RequestBody DadosLogin dadosLogin, @RequestHeader String Authorization){

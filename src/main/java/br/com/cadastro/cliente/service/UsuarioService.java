@@ -65,6 +65,11 @@ public class UsuarioService {
 //        return new StatusResponse("erro ao realizar login", "erro");
 //    }
 
+    public List<Usuario> getUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+
     public Usuario autenticar(DadosLogin dados, String token){
         Usuario user = usuarioRepository.findByEmail(dados.getEmail()).orElseThrow(EmailExistenteException::new);
 
