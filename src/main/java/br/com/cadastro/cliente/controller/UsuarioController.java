@@ -6,6 +6,7 @@ import br.com.cadastro.cliente.dto.DadosLogin;
 import br.com.cadastro.cliente.dto.UsuarioAuthDTO;
 import br.com.cadastro.cliente.dto.UsuarioRegDTO;
 import br.com.cadastro.cliente.service.UsuarioService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,6 @@ public class UsuarioController {
         return new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.ACCEPTED);
     }
 
-
 //    @PostMapping("cadastro")
 //    public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
 //        System.out.println(novoUsuario.getTipoConta());
@@ -41,7 +41,7 @@ public class UsuarioController {
 //        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
 //    }
 
-    @PostMapping("/user")
+    @PostMapping("/cadastro")
     public ResponseEntity<UsuarioAuthDTO> registrate(@RequestBody UsuarioRegDTO usuarioRegDTO){
         Usuario user = usuarioService.registrar(usuarioRegDTO.toUsuario());
         return  new ResponseEntity<UsuarioAuthDTO>(UsuarioAuthDTO.toDTO(user, "Bearer "), HttpStatus.CREATED);
