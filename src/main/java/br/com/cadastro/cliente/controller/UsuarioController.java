@@ -18,16 +18,16 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @PostMapping("login")
+    public ResponseEntity<StatusResponse> loginUsuario(@Valid @RequestBody Usuario usuario) {
+        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
+    }
+
     @PostMapping("cadastro")
     public ResponseEntity<StatusResponse> registrarUsuario(@Valid @RequestBody Usuario novoUsuario) {
         System.out.println(novoUsuario.getTipoConta());
         StatusResponse statusResponse = this.usuarioService.registrarUsuario(novoUsuario);
-        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
-    }
-
-    @PostMapping("login")
-    public ResponseEntity<StatusResponse> loginUsuario(@Valid @RequestBody Usuario usuario) {
-        StatusResponse statusResponse = usuarioService.loginUsuario(usuario);
         return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.OK);
     }
 

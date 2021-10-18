@@ -14,6 +14,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired TokenService tokenService;
+
     public StatusResponse registrarUsuario(Usuario novoUsuario) {
 
         List<Usuario> usuarios = usuarioRepository.findAll();

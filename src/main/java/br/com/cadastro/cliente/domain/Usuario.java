@@ -13,22 +13,36 @@ public class Usuario {
 
     private String nomeUsuario;
 
+    private String email;
+
     private String senha;
 
     private boolean estaLogado;
 
+
     @Column(name = "tipoconta")
     private String tipoConta;
+
+    private String token;
 
     public Usuario() {
     }
 
+    public Usuario(Long id, String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
+        this.id = id;
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
+        this.estaLogado = estaLogado;
+        this.tipoConta = tipoConta;
+    }
     public Usuario(String nomeUsuario, String senha, boolean estaLogado, String tipoConta) {
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
         this.estaLogado = estaLogado;
         this.tipoConta = tipoConta;
     }
+
+
 
     public Long getId() {
         return id;
