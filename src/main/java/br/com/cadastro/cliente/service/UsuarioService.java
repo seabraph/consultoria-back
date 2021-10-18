@@ -24,25 +24,25 @@ public class UsuarioService {
     @Autowired
     private TokenService tokenService;
 
-    public StatusResponse registrarUsuario(Usuario novoUsuario) {
-
-        List<Usuario> usuarios = usuarioRepository.findAll();
-
-        for (Usuario usuario: usuarios) {
-
-            if (usuario.equals(novoUsuario)) {
-                return new StatusResponse("usuário já existe", "erro");
-            }
-        }
-
-        if (novoUsuario.getTipoConta().intern() == "admin") {
-            usuarioRepository.save(novoUsuario);
-            return new StatusResponse("usuário do tipo admin cadastrado com sucesso", "sucesso");
-        } else {
-            usuarioRepository.save(novoUsuario);
-            return new StatusResponse("usuário cadastrado com sucesso", "sucesso");
-        }
-    }
+//    public StatusResponse registrarUsuario(Usuario novoUsuario) {
+//
+//        List<Usuario> usuarios = usuarioRepository.findAll();
+//
+//        for (Usuario usuario: usuarios) {
+//
+//            if (usuario.equals(novoUsuario)) {
+//                return new StatusResponse("usuário já existe", "erro");
+//            }
+//        }
+//
+//        if (novoUsuario.getTipoConta().intern() == "admin") {
+//            usuarioRepository.save(novoUsuario);
+//            return new StatusResponse("usuário do tipo admin cadastrado com sucesso", "sucesso");
+//        } else {
+//            usuarioRepository.save(novoUsuario);
+//            return new StatusResponse("usuário cadastrado com sucesso", "sucesso");
+//        }
+//    }
 
 //    public StatusResponse loginUsuario(Usuario usuario) {
 //
@@ -67,6 +67,7 @@ public class UsuarioService {
 
     public Usuario autenticar(DadosLogin dados, String token){
         Usuario user = usuarioRepository.findByEmail(dados.getEmail()).orElseThrow(EmailExistenteException::new);
+
         if(dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
             return user;
         }
@@ -74,6 +75,7 @@ public class UsuarioService {
             throw new LoginInvalidoException();
         }
     }
+
     private boolean validate(String token) {
         try {
             String tokenTratado = token.replace("Bearer ", "");
@@ -93,6 +95,11 @@ public class UsuarioService {
             throw new TokenInvalidoException();
         }
 
+    }
+
+    public Usuario registrar(Usuario user){
+        user.setToken(tokenService.gerarToken(user));
+        return usuarioRepository.save(user);
     }
 
 }
