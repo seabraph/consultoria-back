@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping()
 @CrossOrigin("*")
 public class UsuarioController {
 
@@ -24,7 +24,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listar")
+    @GetMapping("/usuario")
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> lista = usuarioService.getUsuarios();
         return new ResponseEntity<List<Usuario>>(lista, HttpStatus.OK);
