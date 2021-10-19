@@ -20,6 +20,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class UsuarioController {
 
+
     @Autowired
     private UsuarioService usuarioService;
 
