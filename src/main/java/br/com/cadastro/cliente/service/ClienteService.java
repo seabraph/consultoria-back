@@ -17,6 +17,11 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    public List<Cliente> pesquisar(String nome) {
+        return clienteRepository.findServicoByTitulo(nome);
+    }
+
+
     public List<Cliente> getClientes(){
         return clienteRepository.findAll();
     }

@@ -1,6 +1,7 @@
 package br.com.cadastro.cliente.controller;
 
 import br.com.cadastro.cliente.domain.Cliente;
+import br.com.cadastro.cliente.domain.Servico;
 import br.com.cadastro.cliente.domain.StatusResponse;
 import br.com.cadastro.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @PostMapping("pesquisa")
+    public ResponseEntity<List<Cliente>> pesquisar(@RequestBody Cliente cliente) {
+        List<Cliente> clientes = clienteService.pesquisar(cliente.getNome());
+        return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getClientes() {

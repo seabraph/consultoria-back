@@ -19,13 +19,6 @@ public class ServicoController {
     @Autowired
     private ServicoService servicoService;
 
-
-    @PostMapping("pesquisa")
-    public ResponseEntity<List<Servico>> pesquisar(@RequestBody Servico servico) {
-        List<Servico> servicos = servicoService.pesquisar(servico.getTitulo());
-        return new ResponseEntity<List<Servico>>(servicos, HttpStatus.OK);
-    }
-
     @GetMapping
     public List<Servico> getServicos() {
         return servicoService.getServicos();

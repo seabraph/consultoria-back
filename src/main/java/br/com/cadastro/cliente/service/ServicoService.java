@@ -16,10 +16,6 @@ public class ServicoService {
     @Autowired
     ServicoRepository servicoRepository;
 
-    public List<Servico> pesquisar(String titulo) {
-        return servicoRepository.findServicoByTitulo(titulo);
-    }
-
     public List<Servico> getServicos(){
         return servicoRepository.findAll();
     }
