@@ -2,6 +2,7 @@ package br.com.cadastro.cliente.controller;
 
 import br.com.cadastro.cliente.domain.Servico;
 import br.com.cadastro.cliente.domain.StatusResponse;
+import br.com.cadastro.cliente.domain.Usuario;
 import br.com.cadastro.cliente.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,13 @@ public class ServicoController {
 
     @Autowired
     private ServicoService servicoService;
+
+
+    @PostMapping("pesquisa")
+    public ResponseEntity<List<Servico>> pesquisar(@RequestBody Servico servico) {
+        List<Servico> servicos = servicoService.pesquisar(servico.getTitulo());
+        return new ResponseEntity<List<Servico>>(servicos, HttpStatus.OK);
+    }
 
     @GetMapping
     public List<Servico> getServicos() {
